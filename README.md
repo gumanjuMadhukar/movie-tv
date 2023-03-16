@@ -1,2 +1,2 @@
 # movie-tv
-movie and tv shoows app
+movie and tv shows app
