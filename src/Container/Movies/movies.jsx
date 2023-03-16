@@ -4,22 +4,24 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
+import SearchBox from "../../Components/Search/searchBox";
 
 const Movies = () => {
   const [content, setContent] = useState([]);
-  const GetDataTrending = async () => {
-    //    const API_KEY = '31efb342feaceceeb22902f6a79f0e0d'
-    const { data } = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=31efb342feaceceeb22902f6a79f0e0d`
-    );
+  const [searchValue, setSearchValue] = useState('trending');
+  const GetDataTrending = async (searchValue) => {
+    const url1 = `https://api.themoviedb.org/3/search/movie?api_key=31efb342feaceceeb22902f6a79f0e0d&query=${searchValue}`;
+
+    const url = `https://api.themoviedb.org/3/discover/movie?api_key=31efb342feaceceeb22902f6a79f0e0d`;
+    const { data } = await axios.get(url1);
     setContent(data.results);
-    console.log('data', data)
+    console.log("data", data);
   };
 
   useEffect(() => {
-    GetDataTrending();
+    GetDataTrending(searchValue);
     //eslint-disable-next-line
-  }, []);
+  }, [searchValue]);
   return (
     <div>
       <Container>
@@ -28,6 +30,10 @@ const Movies = () => {
             <section>
               <h1 className="txtCenter">Top Trending Movies</h1>
               <h3 className="txtCenter"> For You</h3>
+              <SearchBox
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+              />
             </section>
           </Col>
         </Row>

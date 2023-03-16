@@ -14,7 +14,7 @@ const Home = () => {
     const API_KEY = '31efb342feaceceeb22902f6a79f0e0d'
     const[searchValue, setSearchValue] = useState('trending/all/day')
     const GetDataTrending = async (searchValue)=>{
-        const url = `https://api.themoviedb.org/3/${searchValue}/500?api_key=31efb342feaceceeb22902f6a79f0e0d&page=${pageNo}`; 
+        const url = `https://api.themoviedb.org/3/search/movie?api_key=31efb342feaceceeb22902f6a79f0e0d&query=${searchValue}`; 
         const url1 =`https://api.themoviedb.org/3/${searchValue}?api_key=31efb342feaceceeb22902f6a79f0e0d`
         const {data} = await axios.get(url1);
         setContent(data.results);
